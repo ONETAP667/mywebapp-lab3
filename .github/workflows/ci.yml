@@ -154,4 +154,3 @@ jobs:
 
       - name: Verify deployment
         run: ./scripts/verify_deployment.sh
-
