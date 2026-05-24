@@ -16,20 +16,18 @@ services:
       timeout: 3s
       retries: 10
 
-  web:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: mywebapp-web
-    depends_on:
-      database:
-        condition: service_healthy
-    volumes:
-      - ./config/config.docker.yaml:/etc/mywebapp/config.yaml:ro
-    networks:
-      - mywebapp_network
-    expose:
-      - "8080"
+web:
+  image: ${IMAGE_NAME}:${IMAGE_TAG}
+  container_name: mywebapp-web
+  depends_on:
+    database:
+      condition: service_healthy
+  volumes:
+    - ./config/config.docker.yaml:/etc/mywebapp/config.yaml:ro
+  networks:
+    - mywebapp_network
+  expose:
+    - "8080"
 
   nginx:
     image: nginx:1.27-alpine
