@@ -7,6 +7,9 @@ TARGET_USER="${TARGET_USER:?TARGET_USER is required}"
 IMAGE_TAG="${IMAGE_TAG:?IMAGE_TAG is required}"
 IMAGE_NAME="${IMAGE_NAME:?IMAGE_NAME is required}"
 
+TARGET_HOST="$(echo "$TARGET_HOST" | tr -d '[:space:]')"
+TARGET_USER="$(echo "$TARGET_USER" | tr -d '[:space:]')"
+
 APP_DIR="/opt/mywebapp"
 
 ssh "$TARGET_USER@$TARGET_HOST" "mkdir -p '$APP_DIR'"
