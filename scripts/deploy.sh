@@ -12,11 +12,6 @@ TARGET_USER="$(echo "$TARGET_USER" | tr -d '[:space:]')"
 
 APP_DIR="/opt/mywebapp"
 
-ssh "$TARGET_USER@$TARGET_HOST" "mkdir -p '$APP_DIR'"
-
-scp docker-compose.yml "$TARGET_USER@$TARGET_HOST:$APP_DIR/docker-compose.yml"
-scp -r config deploy db scripts "$TARGET_USER@$TARGET_HOST:$APP_DIR/"
-
 ssh "$TARGET_USER@$TARGET_HOST" \
   "IMAGE_NAME='$IMAGE_NAME' IMAGE_TAG='$IMAGE_TAG' APP_DIR='$APP_DIR' bash -s" <<'EOF'
 set -euo pipefail
@@ -25,6 +20,11 @@ cd "$APP_DIR"
 
 export IMAGE_NAME
 export IMAGE_TAG
+
+cat > .env <<ENVEOF
+IMAGE_NAME=$IMAGE_NAME
+IMAGE_TAG=$IMAGE_TAG
+ENVEOF
 
 docker pull "$IMAGE_NAME:$IMAGE_TAG"
 
