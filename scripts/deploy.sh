@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2029
 set -euo pipefail
 
 TARGET_HOST="${TARGET_HOST:?TARGET_HOST is required}"
