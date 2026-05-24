@@ -149,6 +149,9 @@ jobs:
           echo "TARGET_HOST=${{ secrets.TARGET_HOST }}" >> "$GITHUB_ENV"
           echo "TARGET_USER=${{ secrets.TARGET_USER }}" >> "$GITHUB_ENV"
 
+      - name: Make scripts executable
+        run: chmod +x scripts/*.sh
+
       - name: Deploy application
         run: ./scripts/deploy.sh
 
