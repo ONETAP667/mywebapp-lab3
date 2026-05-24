@@ -3,6 +3,7 @@ import os
 
 import psycopg2
 import yaml
+import json
 from fastapi import FastAPI, HTTPException, Request, Response
 from psycopg2.extras import RealDictCursor
 from pydantic import BaseModel
